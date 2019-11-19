@@ -12,18 +12,19 @@ t=`date "+%m%d%H"`
 # 进入脚本目录
 cd $DIR
 
+# 设置 .vimrc
+if [ -f '.vimrc' ]; then
+    if [ -f "${TAR}/.vimrc" ]; then
+        mv ${TAR}/.vimrc ${TAR}/.vimrc_bak_${t}
+    fi
+    cp -f .vimrc ${TAR}/.vimrc
+fi
+
 # 修改 .bashrc
 if [ -f '.bashrc' ]; then
     if [ -f "${TAR}/.bashrc" ]; then
         mv ${TAR}/.bashrc ${TAR}/.bashrc_bak_${t}
     fi
     cp -f .bashrc ${TAR}/.bashrc
-fi
-
-# 设置 .vimrc
-if [ -f '.vimrc' ]; then
-    if [ -f "${TAR}/.vimrc" ]; then
-        mv ${TAR}/.vimrc ${TAR}/.vimrc_bak_${t}
-    fi
-    cp -f bashrc ${TAR}/.bashrc
+    source ${TAR}/.bashrc
 fi
